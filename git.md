@@ -8,7 +8,7 @@
 git config --global user.name "lypeng"
 git config --global user.email "893371810@qq.com"
 
-#区分大小写（需要在git项目根目录执行）
+// 区分大小写（需要在git项目根目录执行）
 git config core.ignorecase false
 ```
 
@@ -113,7 +113,6 @@ git reset --hard origin/master
 //关于创建tag
 git tag v1.0
 git tag -a v1.0 -m "first version" //普通带注释的tag
-git tag -s v1.0 -m "first version" //有签名的tag，前提是你有GPG私钥！GPG类似ssh，有公钥和私钥，公钥加密，私钥解密。
 git tag -d v1.0 //删除
 git push origin --tag	//tag信息，需单独推送
 ```
@@ -136,46 +135,59 @@ git merge --no-ff dev //对Dev分支进行合并
 
 功能分支
 
-通常有三种"临时性分支"。
-第一种是功能分支，它是为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。
+为了开发某种特定功能，从Develop分支上面分出来的。开发完成后，要再并入Develop。
 功能分支的名字，可以采用feature-* 的形式命名。
-创建一个功能分支：
-　　git checkout -b feature-x develop
-开发完成后，将功能分支合并到develop分支：
-　　git checkout develop
-　　git merge --no-ff feature-x
-删除feature分支：
-　　git branch -d feature-x
 
+```
+// 创建一个功能分支：
+git checkout -b feature-x develop
+
+// 开发完成后，将功能分支合并到develop分支：
+git checkout develop
+git merge --no-ff feature-x
+
+// 删除feature分支：
+git branch -d feature-x
+```
 
 预发布分支release
 
-第二种是预发布分支，它是指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。
+指发布正式版本之前（即合并到Master分支之前），我们可能需要有一个预发布的版本进行测试。
 预发布分支是从Develop分支上面分出来的，预发布结束以后，必须合并进Develop和Master分支。它的命名，可以采用release-* 的形式。
-创建一个预发布分支：
-　　git checkout -b release-1.2 develop
-确认没有问题后，合并到master分支：
-　　git checkout master
-　　git merge --no-ff release-1.2
-对合并生成的新节点，做一个标签
-　　git tag -a 1.2
-再合并到develop分支：
-　　git checkout develop
-　　git merge --no-ff release-1.2
-最后，删除预发布分支：
-　　git branch -d release-1.2
 
+```
+// 创建一个预发布分支：
+git checkout -b release-1.2 develop
+
+// 确认没有问题后，合并到master分支：
+git checkout master
+git merge --no-ff release-1.2
+
+// 对合并生成的新节点，做一个标签
+git tag -a 1.2
+
+// 再合并到develop分支：
+git checkout develop
+git merge --no-ff release-1.2
+
+// 最后，删除预发布分支：
+git branch -d release-1.2
+```
 
 bug分支
+```
+// 创建一个修补bug分支：
+git checkout -b fixbug-0.1 master
 
-创建一个修补bug分支：
-　　git checkout -b fixbug-0.1 master
-修补结束后，合并到master分支：
-　　git checkout master
-　　git merge --no-ff fixbug-0.1
-　　git tag -a 0.1.1
-再合并到develop分支：
-　　git checkout develop
-　　git merge --no-ff fixbug-0.1
-最后，删除"修补bug分支"：
-　　git branch -d fixbug-0.1
+// 修补结束后，合并到master分支：
+git checkout master
+git merge --no-ff fixbug-0.1
+git tag -a 0.1.1
+
+// 再合并到develop分支：
+git checkout develop
+git merge --no-ff fixbug-0.1
+
+// 最后，删除"修补bug分支"：
+git branch -d fixbug-0.1
+```
