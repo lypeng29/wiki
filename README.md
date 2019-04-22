@@ -13,7 +13,9 @@
 > 如果你采用rst格式，则每个文件头部定义`:github_url: https://github.com/xxx/xx/xx.rst`即可！
 > 而我用的md格式，没办法定义github_url 也不想每个页面都写一个github_url，于是乎折腾开始，如下：
 
-打开主题目录：我的在：`D:\Anaconda3\Lib\site-packages\sphinx_rtd_theme\`
+打开主题目录：我本地的在：`D:\Anaconda3\Lib\site-packages\sphinx_rtd_theme\`
+服务器上的位置: `/usr/local/anaconda3/lib/python3.6/site-packages/sphinx_rtd_theme/`
+
 1. 修改里面的breadcrumbs.html
 ```
     {% block breadcrumbs_aside %}
