@@ -1,9 +1,0 @@
-# gitlab笔记
-
-## 第一2部分
-some豆腐块到付款了大老地方！
-
-## 第二2部分
-`git clone https://www.github.com/lypeng29/a.git`
-
-
