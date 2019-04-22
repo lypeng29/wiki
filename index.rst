@@ -12,7 +12,6 @@
 
    README
    git
-   gitlab
    linux/awk
    linux/bash
    linux/sed

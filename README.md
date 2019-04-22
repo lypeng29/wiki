@@ -1,12 +1,22 @@
 # README
 
+网上大多数都是托管到`https://readthedocs.org/`,不想注册，还是放自己服务器了~
+网上的教程不能用了，自己折腾了两天，终于好了，预览地址：http://wiki.lypeng.com
+
 ## 文档运行流程
 
-本地编辑 =》提交git =》webhook =》 服务器上git pull，make html =》nginx展示
+正常顺序
+本地编辑 => 提交git => webhook => 服务器上自动`git pull && make html` => 访问网址预览
+
+我这里暂时没用webhook，因为需要个PHP文件去执行shell命令，php还需要开启shell_exec函数权限！
+目前用的定时任务，定时执行shell脚本去更新，`git pull && make html`
 
 ## sphinx安装配置
-1. 安装采用默认即可，安装完成后`sphinx-quickstart`一路回车
-2. 让支持markdown，`pip install recommonmark`，修改conf.py,extension里面增加'recommonmark'
+0. 对于python环境，安装个anaconda就好了！
+1. 安装采用`pip install sphinx`即可，anaconda默认带的版本比较低，使用`pip install sphinx --upgrade`升级版本， 安装完成后运行`sphinx-quickstart`一路回车，创建项目目录结构。
+2. 使sphinx支持markdown，需要安装扩展`pip install recommonmark`，然后修改conf.py，在extension里面增加'recommonmark'
+3. 编辑index.rst文件，里面写你的文件名称，不要后缀
+4. Windows下，执行`./make.bat html`生成HTML文件，Linux下，`make html`
 
 ## 关于右上角的edit on github
 
@@ -23,9 +33,9 @@
         {% if hasdoc(pagename) %}
             {% if check_meta and 'github_url' in meta %}
               <!-- User defined GitHub URL -->
-              <a href="{{ meta['github_url'] }}" class="fa fa-github"> {{ _('Edit on GitHub') }}</a>
+              <a href="{{ meta['github_url'] }}" class="fa fa-github" target="_blank"> {{ _('Edit on GitHub') }}</a>
             {% else %}
-              <a href="https://{{ github_host|default("github.com") }}/{{ theme_github_user }}/{{ theme_github_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ theme_github_version }}/{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-github"> {{ _('Edit on GitHub') }}</a>
+              <a href="https://{{ github_host|default("github.com") }}/{{ theme_github_user }}/{{ theme_github_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ theme_github_version }}/{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-github" target="_blank"> {{ _('Edit on GitHub') }}</a>
             {% endif %}
         {% endif %}
       </li>
