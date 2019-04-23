@@ -39,3 +39,21 @@ cd wget
 wget http://sqlbak.v-zm.net/meanhow_Uploads_%date:~0,4%%date:~5,2%%date:~8,2%.zip -O E:\sqlbak\meanhow_Uploads__%date:~0,4%%date:~5,2%%date:~8,2%.zip
 pause
 ```
+
+svn批量更新
+```
+@echo off
+
+SET SVN=D:\Program Files\TortoiseSVN\bin\svn.exe
+
+SET DIRS=F:\www\c1\source\trunk F:\www\c1\front\trunk F:\www\test
+
+for %%c in (%DIRS%) do "%SVN%" update %%c
+
+xcopy /e /y E:\www\c1\front\trunk\front\dist\* E:\www\c1\dist\Webroot\
+xcopy /e /y E:\www\c1\front\trunk\end\admin\* E:\www\c1\dist\Webroot\admin\
+
+pause
+```
+
+
