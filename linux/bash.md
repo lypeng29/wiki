@@ -1,4 +1,4 @@
-# bash笔记
+# linux bash笔记
 ## 1.第一个脚本
 将以下内容保存为test.sh
 ```
