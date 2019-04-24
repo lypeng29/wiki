@@ -18,7 +18,6 @@
    linux/awk
    linux/sed
    linux/bash
-   other/hadoop
    db/01-mysql
    db/02-mysql优化
    db/03-mysql_fun
