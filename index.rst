@@ -27,8 +27,6 @@
    db/07-mongodb
    php/php自动加载机制
    php/ci
-   php/yaf
    python/python
-   python/scrapy
    other/es6
    other/React-Native

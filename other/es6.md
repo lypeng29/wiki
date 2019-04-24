@@ -1,6 +1,9 @@
 # front es6
 es6也称为es2015 全称EMCAScript2015
 
+详情请阅读：http://es6.ruanyifeng.com/#docs/intro
+
+
 ## 1.let 与 var const
 {
 	let a=2;
