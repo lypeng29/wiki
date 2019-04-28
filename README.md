@@ -6,10 +6,19 @@
 ## 文档运行流程
 
 正常顺序
-本地编辑 => 提交git => webhook => 服务器上自动`git pull && make html` => 访问网址预览
+本地编辑 => 提交git => 触发webhook => 服务器上的脚本文件自动更新代码 => 访问网址预览
 
-我这里暂时没用webhook，因为需要个PHP文件去执行shell命令，php还需要开启shell_exec函数权限！
-目前用的定时任务，定时执行shell脚本去更新，`git pull && make html`
+webhook直接指向一个shell脚本文件，`http://xxx.xx.com/cgi-bin/upwiki.sh`
+
+upwiki.sh 脚本内容如下
+```
+cd /home/wwwroot/wiki
+git pull
+make clean
+make html
+```
+关于怎么通过URL访问shell脚本文件，参见：`https://www.lypeng.com/view/126.html`
+
 
 ## sphinx安装配置
 0. 对于python环境，安装个anaconda就好了！
