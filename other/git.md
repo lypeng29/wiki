@@ -191,3 +191,36 @@ git merge --no-ff fixbug-0.1
 // 最后，删除"修补bug分支"：
 git branch -d fixbug-0.1
 ```
+
+## git 修改已提交的注释
+原文地址：`https://www.cnblogs.com/zhangjianbin/p/10126190.html`
+
+在git中，其commit提供了一个--amend参数，可以修改最后一次提交的信息
+修改最后一次提交注释 git commit --amend
+然后在出来的编辑界面，直接编辑注释的信息,保存退出
+
+git rebase -i HEAD~3
+git使用amend选项提供了最后一次commit的反悔。但是对于历史提交呢，就必须使用rebase了。
+修改push后的历史提交注释
+
+这个命令出来之后，会出来三行东东：
+```
+pick:*******
+
+pick:*******
+
+pick:*******  
+```
+如果你要修改哪个，就把那行的pick改成edit，然后保存退出。
+git commit --amend
+修改注释
+
+git rebase --continue
+合并注释
+
+git log
+查看提交记录
+
+提交修改后的注释
+git pull origin master
+git push origin master

@@ -78,4 +78,9 @@ C:\Users\Administrator\AppData\Local\Android\Sdk\tools\emulator.exe -netdelay no
 15. 布局，一行两个或三个。。。
 `https://www.lypeng.com/view/164.html`
 
+16. Warning: Failed child context type: Invalid child context virtualizedCell.cellKey of type number supplied to CellRenderer, expected string.
+key必须是字符串： `keyExtractor={(item, index) => index.toString()}`
+
+17. 下拉刷新与上拉加载
+参见：`https://www.lypeng.com/view/168.html`
 
