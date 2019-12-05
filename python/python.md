@@ -21,6 +21,11 @@ if os.path.exists(filename) == True :
 if os.path.exists(r'E:\pic')==False:
     os.mkdir(r'E:\pic')
 ```
+
+r 普通字符串，否则\p会被转义
+u 含有中文字符
+b 字节
+
 4. 读写文件
 ```
 f = open(filename,'rt',encoding='gbk')
@@ -85,6 +90,25 @@ mongodb
     from pymongo import MongoClient
     conn = MongoClient('mongodb://lypeng:jobs89757Aa@119.29.52.50:27017')
     db = conn.local
+```
+
+9. 列表list操作
+```
+nums = ['a','b','c']
+for i in nums:
+    print(i)
+nums.insert(3,'d') #index,value
+nums.append('e')
+print(nums[4])
+```
+
+10. 字典dict
+```
+score={'zhang':80,'liu':90,'ma':85}
+score['zhang']
+score.get('zhang')
+score.get('li',100)
+score.update({'zhang':88})
 ```
 
 9. 线程与进程
