@@ -224,3 +224,13 @@ git log
 提交修改后的注释
 git pull origin master
 git push origin master
+
+
+## fork了别人的仓库，更新到最新
+```
+git remote add upstream https://github.com/aaa/bbb.git (把别人的仓库添加到upstream)
+git fetch upstream（从原仓库拉取）
+git checkout master （切换到本地master）
+git merge upstream/master（合并拉取的内容）
+git push origin master（推送本地到自己git）
+```
