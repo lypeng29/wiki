@@ -1,4 +1,4 @@
-# db 06-memcache与redis
+# memcache与redis
 
 memcache key/val存储
 redis k/v list set hash

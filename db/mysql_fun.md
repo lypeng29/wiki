@@ -1,4 +1,4 @@
-# db 03-MySQL函数
+# MySQL函数
 
 MySQL数据库中提供了很丰富的函数。
 

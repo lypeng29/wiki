@@ -1,4 +1,4 @@
-# db 05-MySQL主从同步
+# MySQL主从同步
 
 systemctl restart network //这个好使
 //systemctl restart NetworkManager //这个不起作用

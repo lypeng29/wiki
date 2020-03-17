@@ -1,4 +1,4 @@
-# linux bash笔记
+# bash shell笔记
 ## hello world
 将以下内容保存为test.sh
 ```

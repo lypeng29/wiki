@@ -1,4 +1,4 @@
-# linux 常用命令
+# linux常用命令
 
 find命令
 find /etc -name init

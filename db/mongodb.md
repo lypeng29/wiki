@@ -1,4 +1,4 @@
-# db 07.mongodb
+# MongoDB
 
 ## 基础概念
 mongodb是一种基于文档的数据库，库表都会自动创建，不用提前创建，一张表称为一个集合（collections），一条记录称为一篇文档（json格式），每篇文档默认都有一个_id列，CURD操作：insert、remove、update、find

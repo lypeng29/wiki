@@ -1,4 +1,4 @@
-# db 01-mysql笔记
+# mysql笔记
 
 很早前记录的，比较乱，回过来看看还是有所收获的！之后有时间再重新整理
 
@@ -51,15 +51,27 @@ show engines;
 
 索引
 
-普通索引
+KEY类型：
+PRI主键约束
+UNI唯一约束
+MUL可以重复
+
+
+创建索引
+alter table user add index index_name(`name`);
+alter table user add primary key (`id`);
+alter table user add unique (`phone`);
+alter table user add fulltext (`intro`);
+alter table user add name_phone (`name`,`phone`);
+
+删除索引
+alter table user drop index index_name;
+
+普通索引(create语句不是很好记，还是alter table好用)
 create index cid using btree on article(cid);
 create index index_name on table_name(field_name);
 
-唯一索引
-unique index
 
-主键
-auto_increment primary key(id)
 
 联合索引
 create index index_name on table_name(name,age,phoneNum);
@@ -265,7 +277,29 @@ union all
 
 
 
+mysql优化
 
+优化MYSQL数据库的方法:
+
+1,选取最适用的字段属性,尽可能减少定义字段长度,尽量把字段设置NOT NULL,例如'省份,性别',最好设置为ENUM
+
+2，使用join代替子查询
+
+3，使用联合(UNION)来代替手动创建的临时表
+
+4，事务处理（保证数据完整性,例如添加和修改同时,两者成立则都执行,一者失败都失败）
+
+5，适当建立索引（如何建立索引？索引的利与弊？）
+
+6，优化sql语句
+
+7，explain可以看到mysql执行计划
+
+8，分表（垂直分表，水平分表？）
+
+执行时间，长的
+
+开启慢查询日志，分析具体sql
 
 
 
