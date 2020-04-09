@@ -4,50 +4,49 @@
 
 -----------------------
 
-mysql事务隔离级别
-
+mysql事务隔离级别(这个稍显复杂，现阶段也用不到，了解就好)
 未提交读
 已提交读
 可重复读（mysql_inodb）
 可串行化
 
-具体怎么设置没记住~
-
-
-锁表
 
 读锁（共享锁）
+读锁主要用于读取数据时，防止读取结果不正确，让其他线程不能进行写操作。
+
 lock table TABLENAME read;
 读锁，所有线程只能读，不能写
 
 lock table TABLENAME read local;
 加local后，其他线程可以insert，不能update
 
-读锁主要用于读取数据时，防止读取结果不正确，让其他线程不能进行写操作。
-
+示例
 Select sum(total) from orders;
 Select sum(subtotal) from order_detail;
 这时，如果不先给两个表加锁，就可能产生错误的结果，因为第一条语句执行过程中，order_detail表可能已经发生了改变。因此，正确的方法应该是：
+```
 Lock tables orders read local, order_detail read local;
 Select sum(total) from orders;
 Select sum(subtotal) from order_detail;
 Unlock tables;
-
+```
+```
 lock table actor as a read,actor as b read;//如果使用别名，别名也要锁定
-
+```
 
 写锁（排它锁）
 lock table TABLENAME write; 
 本线程可以读取写入当前表，不能读写其他表；其他线程不能读写当前表，可以读写别的表
-...
-unlock tables;
 
+
+mysql命令
+```
 show engine innodb status
 show create table TABLENAME;
 show index from TABLENAME;
 show table status like 'TABLENAME'\G
 show engines;
-
+```
 
 索引
 
@@ -70,8 +69,6 @@ alter table user drop index index_name;
 普通索引(create语句不是很好记，还是alter table好用)
 create index cid using btree on article(cid);
 create index index_name on table_name(field_name);
-
-
 
 联合索引
 create index index_name on table_name(name,age,phoneNum);

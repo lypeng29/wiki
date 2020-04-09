@@ -79,6 +79,13 @@ select trim(' bar ');
 
 三、日期和时间函数 
 
+日期与时间戳转换
+
+select UNIX_TIMESTAMP('2020-04-01 00:00:00')
+select FROM_UNIXTIME(1567267200,'%Y-%m-%d %H:%i:%s')
+
+FROM_UNIXTIME第二个参数不写，默认是年月日时分秒，全的~
+
 当前时间日期
 now(),日期加时间，年月日时分秒
 select now();//2018-07-25 10:15:08
@@ -93,6 +100,7 @@ select curtime();//10:16:15
 时间加减
 DATE_ADD(date,INTERVAL expr type) ,进行日期增加的操作，可以精确到秒
 DATE_SUB(date,INTERVAL expr type) ，进行日期减少的操作，可以精确到秒
+```
 select "1997-12-31 23:59:59" + INTERVAL 1 SECOND;
 select INTERVAL 1 DAY + "1997-12-31";
 select "1998-01-01" - INTERVAL 1 SECOND;
@@ -103,13 +111,16 @@ select DATE_SUB("1998-01-02", INTERVAL 31 DAY);
 
 expr中间不一定用冒号分开，也可以是空格或其他
 expr位数等于或小于type，如果expr多于type则返回null
+```
 
 //示例如下
+
 | expr | type | 注释 |
 | --- |---|---|
 |"1 8 5 1" |   day_second |   //正常,加(减)1天8时5分1秒|
 |"8 5 1"    |  day_second  |  //小于,加(减)0天8时5分1秒|
 |"2 1 8 5 1" | day_second  |  //多于,返回null，不会加(减)2月1天8时5分1秒，因为后面定义的是：天_秒,即 天时分秒 只有四位|
+
 
 其中type可以是下列值：
 单个词：
