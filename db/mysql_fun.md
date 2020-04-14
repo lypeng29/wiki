@@ -1,17 +1,13 @@
 # MySQL函数
 
-MySQL数据库中提供了很丰富的函数。
-
-MySQL函数包括数学函数、字符串函数、日期和时间函数、条件判断函数、系统信息函数、加密函数、格式化函数等。MySQL函数可以对表中数据进行相应的处理，以便得到用户希望得到的数据。这些函数可以使MySQL数据库的功能更加强大。
-
-select语句及其条件表达式都可以使用这些函数。同时，INSERT 、UPDATE、DELECT语句及其条件表达式也可以使用这些函数。例如，表中的某个数据是负数，现在需要将这个数据显示为正数。这就可以使用绝对值函数。
-
+MySQL函数包括数学函数、字符串函数、日期和时间函数、条件判断函数、系统信息函数、加密函数、格式化函数等。
 
 一、数学函数
 
-数学函数是MySQL中常用的一类函数。主要用于处理数字，包括整型、浮点数等。数学函数包括绝对值函数、正弦函数、余弦函数、获取随机数的函数等。
+主要用于处理数字，包括整型、浮点数等。数学函数包括绝对值函数、正弦函数、余弦函数、获取随机数的函数等。
 sin,cos,pi,tan等等这些不常用，常用count，sum,avg,min,max基础常见的就不说了。
 
+```
 select rand(); //随机数，返回0,1之间的随机数，16位小数
 
 select abs(-32); //绝对值
@@ -27,17 +23,17 @@ select round(1.58);//取整数，四舍五入。返回2
 select format(1.999,1);//保留小数，四舍五入。返回 2.0
 
 select truncate(1.999,1);//保留小数，直接截取，返回 1.9
-
+```
 
 二、字符串函数
-
-replace(str,from_str,to_str):返回字符串str，其字符串from_str的所有出现由字符串to_str代替。 
+```
+replace(str,from_str,to_str) 替换
 select replace('uploads/img/a.jpg', 'img', 'images'); //返回 uploads/images/a.jpg
 
-repeat(str,count):返回由重复countTimes次的字符串str组成的一个字符串。如果count <= 0，返回一个空字符串。如果str或count是NULL，返回NULL。
+repeat(str,count):重复，如果count <= 0，返回一个空字符串。如果str或count是NULL，返回NULL。
 select repeat('MySQL', 3); //返回MySQLMySQLMySQL
 
-reverse(str):返回颠倒字符顺序的字符串str。
+reverse(str):反转字符串
 select reverse('abc'); //返回cba
 
 insert(str,pos,len,newstr):返回字符串str，在位置pos起始的子串且len个字符长的子串由字符串newstr代替。
@@ -75,19 +71,20 @@ select substring('howareyou',4);//areyou
 
 trim(str),rtrim(str),ltrim。去空格
 select trim(' bar ');
-
+```
 
 三、日期和时间函数 
 
 日期与时间戳转换
-
-select UNIX_TIMESTAMP('2020-04-01 00:00:00')
-select FROM_UNIXTIME(1567267200,'%Y-%m-%d %H:%i:%s')
-
-FROM_UNIXTIME第二个参数不写，默认是年月日时分秒，全的~
+```
+select unix_timestamp('2020-04-01 00:00:00')
+select from_unixtime(1567267200,'%Y-%m-%d %H:%i:%s')
+```
+from_unixtime第二个参数不写，默认是年月日时分秒，全的~
 
 当前时间日期
 now(),日期加时间，年月日时分秒
+```
 select now();//2018-07-25 10:15:08
 select now()+0;//20180725101508
 
@@ -96,10 +93,12 @@ select curdate();//2018-07-25
 
 current_time/curtime(),当前时间，时分秒
 select curtime();//10:16:15
-
+```
 时间加减
+```
 DATE_ADD(date,INTERVAL expr type) ,进行日期增加的操作，可以精确到秒
 DATE_SUB(date,INTERVAL expr type) ，进行日期减少的操作，可以精确到秒
+```
 ```
 select "1997-12-31 23:59:59" + INTERVAL 1 SECOND;
 select INTERVAL 1 DAY + "1997-12-31";
@@ -108,6 +107,10 @@ select DATE_ADD("1997-12-31 23:59:59", INTERVAL 1 SECOND);
 select DATE_ADD("1997-12-31 23:59:59", INTERVAL "1:1" MINUTE_SECOND);
 select DATE_SUB("1998-01-01 00:00:00", INTERVAL "1 1:1:1" DAY_SECOND);
 select DATE_SUB("1998-01-02", INTERVAL 31 DAY);
+
+select DATE_ADD(now(), INTERVAL 1 day); //加一天
+select DATE_SUB(now(), INTERVAL 1 day); //加一天
+
 
 expr中间不一定用冒号分开，也可以是空格或其他
 expr位数等于或小于type，如果expr多于type则返回null
@@ -124,16 +127,28 @@ expr位数等于或小于type，如果expr多于type则返回null
 
 其中type可以是下列值：
 单个词：
-MICROSECOND SECOND MINUTE HOUR DAY WEEK MONTH QUARTER YEAR
+`MICROSECOND SECOND MINUTE HOUR DAY WEEK MONTH QUARTER YEAR`
 复合词：
-SECOND_MICROSECOND MINUTE_MICROSECOND HOUR_MICROSECOND DAY_MICROSECOND
-MINUTE_SECOND HOUR_SECOND DAY_SECOND
-HOUR_MINUTE DAY_MINUTE
-DAY_HOUR YEAR_MONTH
+```
+SECOND_MICROSECOND
+MINUTE_MICROSECOND
+HOUR_MICROSECOND
+DAY_MICROSECOND
 
+MINUTE_SECOND
+HOUR_SECOND
+DAY_SECOND
+
+HOUR_MINUTE
+DAY_MINUTE
+
+DAY_HOUR
+
+YEAR_MONTH
+```
 
 dayof开头的 (dayofweek/dayofyear) 和week
-
+```
 dayofweek(date)(1=星期天,7=星期六)。
 select dayofweek('2018-07-24');  // 返回3，即星期二，还有一个weekday(0=星期一,6=星期天)，推荐用dayofweek吧，记住这个就好了。
 
@@ -142,21 +157,28 @@ select dayofyear('2018-07-24'); //返回205,即2018年的第205天，2018已经�
 
 week(date,type=0) //一年当中的第几周，范围0-52，第二个参数默认0，即一周从星期天开始，1=从周一开始
 week('2018-07-24'); //返回29
+```
 
 name结尾的（dayname/monthname）
+```
 select dayname("2018-07-24");//返回 Tuesday
 select monthname(2018-07-24); //返回July。
+```
 
 常规单词
+```
 quarter(date) 季度（1-4）
 year(date):返回date的年份，范围在1000到9999。
 hour(time):返回time的小时，范围是0到23。//可以是time或者datetime，如果只有date返回0
 minute(time):返回time的分钟，范围是0到59。
 second(time):回来time的秒数，范围是0到59。
+```
 
 //使用示例
+```
 select quarter(now());  //返回3
 select year(now());     //返回2018
+```
 
 > 关于year范围有误，year('9-05-03')//返回9,当然一般不会查询公元9年
 一位数与三位数的返回本身
@@ -180,7 +202,6 @@ timestamp范围1970-01-01 00:00:01 - 2038-01-19 03:14:07（UTC）
 >2) 等过了再说。
 >最后补充一个彩蛋：北京时间2038-01-19 11:14:07，如果某些系统还在使用MySQL的Timestamp，或者系统使用的编程语言用4字节补码整型（例如Java的int）来表示时间戳的，这些系统都会跪掉，说不定会搞出点什么大新闻（例如飞机航班系统挂掉、银行某系统跪掉），好吧，我乱猜的，等着那一天吧。（https://segmentfault.com/q/1010000004418596?_blank）
 
->哈哈哈，20年后，各种工具版本更新换代，应该会出现新的东西，各大技术媒体也会提前发布这种文章防范的～但不排除意外，估计会有～20年后，我在哪里？我是谁？谁知道呢？
 
 
 四、流程控制与比较函数  
@@ -189,10 +210,13 @@ case ... when ... then ... when ... then ... else ... end
 
 CASE value WHEN [compare-value] THEN result [WHEN [compare-value] THEN result ...] [ELSE result] END CASE WHEN [condition] THEN result [WHEN [condition] THEN result ...] [ELSE result] END 
 在第一个方案的返回结果中， value=compare-value。而第二个方案的返回结果是第一种情况的真实结果。如果没有匹配的结果值，则返回结果为ELSE后的结果，如果没有ELSE 部分，则返回值为 NULL。
+```
 select CASE 11 WHEN 1 THEN 'one' WHEN 2 THEN 'two' ELSE 'more' END;
 select CASE WHEN 1 > 0 THEN 'true' ELSE 'false' END;
 select CASE BINARY 'B' WHEN 'a' THEN 1 WHEN 'b' THEN 2 END;
+```
 
+```
 if(expr1,expr2,expr3) 
 如果 expr1 是TRUE (expr1 <> 0 and expr1 <> NULL)，则 IF()的返回值为expr2;否则返回值则为 expr3。
 select if(1 < 2,'yes ','no');
@@ -214,34 +238,31 @@ select strcmp(10, 8); //返回1
 true = 1
 false = 0
 与null比较 //返回null
-
+```
 
 五、系统信息函数
 
-系统信息函数用来查询MySQL数据库的系统信息。例如，查询数据库的版本，查询数据库的当前用户等。本小节将详细讲解系统信息函数的作用和使用方法。
-
 获取MySQL版本号、连接数、数据库名的函数
-VERSION()函数返回数据库的版本号；
-CONNECTION_ID()函数返回服务器的连接数，也就是到现在为止MySQL服务的连接次数；
-DATABASE()和SCHEMA()返回当前数据库名。
+
+VERSION() 返回数据库的版本号；
+CONNECTION_ID() 返回服务器的连接数，也就是到现在为止MySQL服务的连接次数；
+DATABASE()和SCHEMA() 返回当前数据库名。
 
 获取用户名的函数
 USER()、SYSTEM_USER()、SESSION_USER()、CURRENT_USER()和CURRENT_USER这几个函数可以返回当前用户的名称。
 
 获取字符串的字符集和排序方式的函数
-CHARSET(str)函数返回字符串str的字符集，一般情况这个字符集就是系统的默认字符集；COLLATION(str)函数返回字符串str的字符排列方式。
+CHARSET(str) 返回字符串str的字符集，一般情况这个字符集就是系统的默认字符集；
+COLLATION(str) 返回字符串str的字符排列方式。
 
 获取最后一个自动生成的ID值的函数
-LAST_INSERT_ID()函数返回最后生成的AUTO_INCREMENT值。
+LAST_INSERT_ID() 返回最后生成的AUTO_INCREMENT值。
 
 
 六、加密函数
 
-加密函数是MySQL中用来对数据进行加密的函数。因为数据库中有些很敏感的信息不希望被其他人看到，就应该通过加密方式来使这些数据变成看似乱码的数据。例如用户的密码，就应该经过加密。本小节将详细讲解加密函数的作用和使用方法。
-下面是各种加密函数的名称、作用和使用方法。
-
 加密函数PASSWORD(str)
-PASSWORD(str)函数可以对字符串str进行加密。一般情况下，PASSWORD(str)函数主要是用来给用户的密码加密的。
+PASSWORD(str)函数可以对字符串str进行加密。
 
 加密函数MD5(str)
 MD5(str)函数可以对字符串str进行加密。
@@ -286,15 +307,19 @@ MySQL进阶
 看看算法，再练习下MySQL～
 
 单表可以多次利用
+`select t1.xxx,t2.xxx from p as t1,p as t2 where ... `
 
 join查询
+```
 left join   //查询左边表全部记录，右边的去补，没有则是null
 right join  //与left相反
 inner join = join   //公共记录，不会去补null，记录数 <= left/right join
+```
 
 ifnull(A,B) // A ? A : B
-select ifnull((select Salary from table order by Salary desc limit 1,1),null) as SecondSalary;
+`select ifnull((select Salary from table order by Salary desc limit 1,1),null) as SecondSalary;`
 
+```
 ISNULL //null ? 1 : 0
 select isnull(1+1); // 0
 select isnull(1/0); // 1
@@ -302,20 +327,23 @@ select isnull(1/0); // 1
 NULLIF //expr1==expr2 ? 1 : expr1
 SELECT NULLIF(2,2); // 1
 SELECT NULLIF(3,2); // 3
+```
 
 查询person的信息，left join
-select FirstName, LastName, City, State from Person left join Address on Person.PersonId=Address.PersonId
+`select FirstName, LastName, City, State from Person left join Address on Person.PersonId=Address.PersonId`
+
 
 删除重复email，并保留小ID
-DELETE p1 FROM Person p1, Person p2 WHERE p1.Email = p2.Email AND p1.Id > p2.Id
+`DELETE p1 FROM Person p1, Person p2 WHERE p1.Email = p2.Email AND p1.Id > p2.Id`
+
 
 温度两天内连续上升的ID
-select w2.Id from Weather as w1 join Weather as w2 on w1.Temperature<w2.Temperature and datediff(w2.RecordDate,w1.RecordDate)=1
+`select w2.Id from Weather as w1 join Weather as w2 on w1.Temperature<w2.Temperature and datediff(w2.RecordDate,w1.RecordDate)=1`
 
 对调同一字段的两个值
 // update salary set sex=if(sex='f','m','f')
 update salary set sex = char(ascii('f')+ascii('m')-ascii(sex)); //牛
 
 部门最高工资的员工
-select d.Name as Department,e.Name as Employee,e.Salary from Employee as e join Department as d on e.DepartmentId=d.Id and e.Salary>=(select max(Salary) from Employee as e2 where e2.DepartmentId=e.DepartmentId);
+`select d.Name as Department,e.Name as Employee,e.Salary from Employee as e join Department as d on e.DepartmentId=d.Id and e.Salary>=(select max(Salary) from Employee as e2 where e2.DepartmentId=e.DepartmentId);`
 

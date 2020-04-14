@@ -4,7 +4,7 @@ memcache key/val存储
 redis k/v list set hash
 
 memcache 存储在内存，断电后会挂掉，数据量不能超过内存大小
-redis 有部分存储在硬盘，支持持久化，重启后可以再次加载。支持master-slave模式备份
+redis 有部分存储在硬盘，支持持久化(rdb,aof)，重启后可以再次加载。支持master-slave模式备份
 
 
 k/v存储选memcache，其他redis
