@@ -2,7 +2,7 @@
 
 发现一个比sphinx更简单的，docsify！不用生成html
 
-官方地址：`https://docsify.js.org/`
+官网地址：`https://docsify.js.org/`
 
 ## 文档运行流程
 
