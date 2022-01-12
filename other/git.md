@@ -7,9 +7,6 @@
 ```
 git config --global user.name "lypeng"
 git config --global user.email "893371810@qq.com"
-
-// 区分大小写（需要在git项目根目录执行）
-git config core.ignorecase false
 ```
 
 创建ssh-key
@@ -23,6 +20,10 @@ git clone git@github.com:lypeng29/baike_spider
 git push
 ```
 
+git默认是忽略大小写的，而Linux区分大小写，所以给git设置下区分大小写（需要在git项目根目录执行）
+
+`git config core.ignorecase false`
+
 ## 常规操作
 ```
 git status //查看当前git状态 
@@ -35,15 +36,21 @@ git push origin master //推送到远程仓库
 ## 版本回退
 
 ### 执行了git add，没有执行git commit
-`git reset filename` 或者批量：`git reset *`
+`git reset a.txt` 或者批量：`git reset *`
 
 ### 执行了git add，并且执行git commit
 ```
+回退到某个版本
+git reset 057d a.txt
+
+回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit
+git reset HEAD a.txt
+
+回退a.txt这个文件的版本到上一个版本
+git reset HEAD^ a.txt
+
 回退所有内容到上一个版本　　　　
 git reset HEAD^
-
-回退a.py这个文件的版本到上一个版本
-git reset HEAD^ a.py
 
 向前回退到第3个版本
 git reset --soft HEAD~3
@@ -51,11 +58,7 @@ git reset --soft HEAD~3
 将本地的状态回退到和远程的一样
 git reset --hard origin/master
 
-回退到某个版本
-git reset 057d
 
-回退到上一次提交的状态，按照某一次的commit完全反向的进行一次commit
-git reset HEAD
 ```
 
 ### 远程的回退（执行了commit与push）
