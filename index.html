@@ -7,14 +7,23 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
 </head>
 <body>
+  <nav>
+    <a href="#/">文档</a>
+    <a href="/words.html">说说</a>
+    <a href="/guestbook.html">留言</a>
+    <a href="/pay.html">打赏</a>
+  </nav>
   <div id="app"></div>
   <script>
     window.$docsify = {
       name: '风轻云淡',
+      basePath: '/docs/',
       repo: '',
+      subMaxLevel: 2,
       loadSidebar: true
     }
   </script>
